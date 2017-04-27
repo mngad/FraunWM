@@ -16,5 +16,5 @@ int main(int argc, char** argv){
 
 	window_manager->Run();
 
-	return EXIT_SUCCESS; 
+	return EXIT_SUCCESS 
 }
