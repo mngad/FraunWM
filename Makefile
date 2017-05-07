@@ -1,20 +1,9 @@
-CXXFLAGS ?= -Wall -g
-CXXFLAGS += -std=c++1y
-CXXFLAGS += `pkg-config --cflags x11 libglog`
-LDFLAGS += `pkg-config --libs x11 libglog`
+PREFIX?=/usr/X11R6
+CFLAGS?=-Os -pedantic -Wall
 
-all: fraunWM
+all:
+	$(CC) $(CFLAGS) -I$(PREFIX)/include fraunwm.c -L$(PREFIX)/lib -lX11 -o fraunwm
 
-HEADERS = \
-			      window_manager.hpp
-SOURCES = \
-			      window_manager.cpp \
-				      main.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
+clean:
+	rm -f fraunwm
 
-fraunWM: $(HEADERS) $(OBJECTS)
-		$(CXX) -o $@ $(OBJECTS) $(LDFLAGS)
-
-.PHONY: clean
-	clean:
-		rm -f fraunWM $(OBJECTS)
